@@ -1,0 +1,386 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist-mono';
+
+@custom-variant dark (&:is(.dark *));
+
+/* ─────────────────────────────────────────────────────────────
+   Design tokens — light (clean / airy) + dark (cold minimal)
+   ───────────────────────────────────────────────────────────── */
+
+@theme inline {
+  --font-sans: 'Geist Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', 'PingFang SC',
+    'Microsoft YaHei', sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+
+  /* shadcn 语义层 */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* 本项目语义层 */
+  --color-subtle: var(--subtle);
+  --color-hover: var(--hover);
+  --color-segment: var(--segment);
+
+  --color-hairline: var(--hairline);
+  --color-hairline-soft: var(--hairline-soft);
+  --color-hairline-strong: var(--hairline-strong);
+
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-ink-ghost: var(--ink-ghost);
+
+  --color-track: var(--track);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-line: var(--brand-line);
+
+  --color-mint: var(--mint);
+  --color-mint-ink: var(--mint-ink);
+  --color-mint-soft: var(--mint-soft);
+  --color-mint-line: var(--mint-line);
+
+  --color-danger: var(--danger);
+  --color-danger-hover: var(--danger-hover);
+  --color-danger-soft: var(--danger-soft);
+  --color-danger-line: var(--danger-line);
+
+  --color-warn: var(--warn);
+
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+:root {
+  --radius: 0.625rem;
+
+  --background: #f4f6f8;
+  --foreground: #1f2937;
+  --card: #ffffff;
+  --card-foreground: #1f2937;
+  --popover: #ffffff;
+  --popover-foreground: #1f2937;
+
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f3f5;
+  --secondary-foreground: #1f2937;
+  --muted: #f7f9fb;
+  --muted-foreground: #6b7280;
+  --accent: #eff6ff;
+  --accent-foreground: #1d4ed8;
+  --destructive: #d14343;
+
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #3b82f6;
+
+  --subtle: #f7f9fb;
+  --hover: #f8fafc;
+  --segment: #e9edf1;
+
+  --hairline: #e5e7eb;
+  --hairline-soft: #f1f3f5;
+  --hairline-strong: #d3d9e0;
+
+  --ink: #1f2937;
+  --ink-soft: #6b7280;
+  --ink-faint: #9ca3af;
+  --ink-ghost: #c6cdd5;
+
+  --track: #eef1f4;
+
+  --brand: #3b82f6;
+  --brand-hover: #2f73e0;
+  --brand-strong: #1d4ed8;
+  --brand-soft: #eff6ff;
+  --brand-line: #bfdbfe;
+
+  --mint: #10b981;
+  --mint-ink: #0f766e;
+  --mint-soft: #f1faf6;
+  --mint-line: #dcf2e7;
+
+  --danger: #d14343;
+  --danger-hover: #be3a3a;
+  --danger-soft: #fdf2f2;
+  --danger-line: #f3d3d5;
+
+  --warn: #b45309;
+
+  --shadow-card: 0 4px 20px rgb(17 24 39 / 3%), 0 1px 2px rgb(17 24 39 / 2%);
+  --shadow-pop: 0 20px 60px rgb(17 24 39 / 12%);
+  --shadow-float: 0 12px 40px rgb(17 24 39 / 16%);
+  --shadow-panel: -12px 0 40px rgb(17 24 39 / 8%);
+  --shadow-drag: 0 10px 28px rgb(17 24 39 / 12%);
+  --shadow-raised: 0 1px 2px rgb(17 24 39 / 8%);
+
+  /* 标签（浅色：莫兰迪马卡龙） */
+  --tag-p0-fg: #b4232f;
+  --tag-p0-bg: #fbe9ea;
+  --tag-p0-border: #f3d3d5;
+  --tag-p1-fg: #a15c07;
+  --tag-p1-bg: #fdf1e0;
+  --tag-p1-border: #f5e0c4;
+  --tag-p2-fg: #5b6472;
+  --tag-p2-bg: #eff1f4;
+  --tag-p2-border: #e1e5ea;
+
+  --tag-homework-fg: #0f766e;
+  --tag-homework-bg: #e6f6ef;
+  --tag-homework-border: #cdebdf;
+  --tag-exam-fg: #9d355b;
+  --tag-exam-bg: #fbeaf0;
+  --tag-exam-border: #f2d4e0;
+  --tag-project-fg: #4c46a8;
+  --tag-project-bg: #eeedfb;
+  --tag-project-border: #dcdaf3;
+  --tag-reading-fg: #2563a8;
+  --tag-reading-bg: #e9f1fd;
+  --tag-reading-border: #d4e3f9;
+  --tag-other-fg: #5b6472;
+  --tag-other-bg: #eff1f4;
+  --tag-other-border: #e1e5ea;
+
+  color-scheme: light;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --card: #171717;
+  --card-foreground: #ededed;
+  --popover: #171717;
+  --popover-foreground: #ededed;
+
+  --primary: #4c8dff;
+  --primary-foreground: #ffffff;
+  --secondary: #1f1f1f;
+  --secondary-foreground: #ededed;
+  --muted: #1a1a1a;
+  --muted-foreground: #a3a3a3;
+  --accent: #1e1e1e;
+  --accent-foreground: #ededed;
+  --destructive: #ff6b6b;
+
+  --border: #262626;
+  --input: #262626;
+  --ring: #4c8dff;
+
+  --subtle: #1a1a1a;
+  --hover: #1c1c1c;
+  --segment: #202020;
+
+  --hairline: #262626;
+  --hairline-soft: #1f1f1f;
+  --hairline-strong: #333333;
+
+  --ink: #ededed;
+  --ink-soft: #a3a3a3;
+  --ink-faint: #7a7a7a;
+  --ink-ghost: #4f4f4f;
+
+  --track: #2a2a2a;
+
+  --brand: #4c8dff;
+  --brand-hover: #3b7deb;
+  --brand-strong: #93c5fd;
+  --brand-soft: #16233a;
+  --brand-line: #2a4a7a;
+
+  --mint: #34d399;
+  --mint-ink: #6ee7b7;
+  --mint-soft: #10261f;
+  --mint-line: #1e4d44;
+
+  --danger: #ff6b6b;
+  --danger-hover: #ff5252;
+  --danger-soft: #2a1616;
+  --danger-line: #4a2325;
+
+  --warn: #fbbf24;
+
+  --shadow-card: 0 4px 20px rgb(0 0 0 / 40%), 0 1px 2px rgb(0 0 0 / 30%);
+  --shadow-pop: 0 20px 60px rgb(0 0 0 / 55%);
+  --shadow-float: 0 12px 40px rgb(0 0 0 / 60%);
+  --shadow-panel: -12px 0 40px rgb(0 0 0 / 45%);
+  --shadow-drag: 0 10px 28px rgb(0 0 0 / 55%);
+  --shadow-raised: 0 1px 2px rgb(0 0 0 / 40%);
+
+  /* 标签（深色：低饱和暗底 + 提亮文字） */
+  --tag-p0-fg: #ff9b9b;
+  --tag-p0-bg: #2b1516;
+  --tag-p0-border: #4a2325;
+  --tag-p1-fg: #f5c070;
+  --tag-p1-bg: #2a2010;
+  --tag-p1-border: #4a381a;
+  --tag-p2-fg: #a3a3a3;
+  --tag-p2-bg: #1f1f1f;
+  --tag-p2-border: #2e2e2e;
+
+  --tag-homework-fg: #5eead4;
+  --tag-homework-bg: #12302b;
+  --tag-homework-border: #1e4d44;
+  --tag-exam-fg: #f9a8d4;
+  --tag-exam-bg: #2e1523;
+  --tag-exam-border: #4a2438;
+  --tag-project-fg: #c4b5fd;
+  --tag-project-bg: #1e1a33;
+  --tag-project-border: #362e5e;
+  --tag-reading-fg: #93c5fd;
+  --tag-reading-bg: #12233a;
+  --tag-reading-border: #24446b;
+  --tag-other-fg: #a3a3a3;
+  --tag-other-bg: #1f1f1f;
+  --tag-other-border: #2e2e2e;
+
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply font-sans;
+    background-color: var(--background);
+    color-scheme: light;
+  }
+
+  .dark html,
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    transition:
+      background-color 0.28s ease,
+      color 0.28s ease;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--brand) 18%, transparent);
+    color: var(--ink);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--hairline-strong) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--hairline-strong);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  /* 主题切换时给所有元素加过渡，切换结束移除，避免拖慢日常交互 */
+  html.theme-switching *,
+  html.theme-switching *::before,
+  html.theme-switching *::after {
+    transition:
+      background-color 0.28s ease,
+      border-color 0.28s ease,
+      color 0.28s ease,
+      fill 0.28s ease,
+      box-shadow 0.28s ease !important;
+  }
+}
+
+@layer utilities {
+  .surface-card {
+    @apply rounded-2xl border;
+    background-color: var(--card);
+    border-color: var(--hairline);
+    box-shadow: var(--shadow-card);
+  }
+
+  .surface-soft {
+    @apply rounded-xl;
+    background-color: var(--subtle);
+  }
+
+  .shadow-float {
+    box-shadow: var(--shadow-float);
+  }
+
+  .shadow-pop {
+    box-shadow: var(--shadow-pop);
+  }
+
+  .shadow-panel {
+    box-shadow: var(--shadow-panel);
+  }
+
+  .shadow-drag {
+    box-shadow: var(--shadow-drag);
+  }
+
+  .shadow-raised {
+    box-shadow: var(--shadow-raised);
+  }
+
+  /* 输入框聚焦时的柔和光晕（跟随主题） */
+  .focus-glow:focus-within {
+    box-shadow:
+      0 0 0 3px color-mix(in oklab, var(--brand) 12%, transparent),
+      var(--shadow-card);
+  }
+
+  .num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+    letter-spacing: -0.01em;
+  }
+
+  .eyebrow {
+    @apply text-[10.5px] font-medium tracking-[0.1em] uppercase;
+    color: var(--ink-faint);
+  }
+}
